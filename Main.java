@@ -51,9 +51,7 @@ public class Main {
                     break;
 
                 case 2:
-                    System.out.println(
-                            "\n \n \n" + "-------------" + "\n" +
-                                    "Digite o código do robô: ");
+                    System.out.println("\n \n \n" + "-------------" + "\n" + "Digite o código do robô: ");
                     int codigoBusca = s.nextInt();
                     for (Robo roboBuscar : robosLista) {
                         if (roboBuscar.codigo == codigoBusca) {
@@ -66,6 +64,12 @@ public class Main {
                             System.out.println("Vitorias: " + roboBuscar.vitorias);
                             System.out.println("Derrotas: " + roboBuscar.derrotas);
                             System.out.println("Combates Realizados: " + roboBuscar.combatesRealizados);
+
+                            if (roboBuscar.energiaAtual > 30) {
+                                System.out.println("Pronto para lutar: Disponível!");
+                            } else {
+                                System.out.println("Pronto para lutar: Em recuperação!");
+                            }
                             System.out.println("Pontuação Total: " + roboBuscar.pontos);
                             System.out.println("\n\n\n");
                         }
@@ -80,12 +84,20 @@ public class Main {
                                         " Nome: " + r.nome + "\n" +
                                         " Código: " + r.codigo + "\n" +
                                         " ataque: " + r.ataque + "\n" +
-                                        " defesa: " + r.defesa + "\n \n"
-                                    );
+                                        " defesa: " + r.defesa + "\n \n");
                     }
                     break;
                 case 4:
+                    System.out.println("\n \n \n" + "-------------" + "\n" + "Digite o código primeiro do robô: ");
+                    int codigo1 = s.nextInt();
 
+                    System.out.println("\n \n \n" + "-------------" + "\n" + "Digite o código do segundo robô: ");
+                    int codigo2 = s.nextInt();
+
+                    Robo robo1 = buscarRobo(robosLista, codigo1);
+                    Robo robo2 = buscarRobo(robosLista, codigo2);
+
+                    combate(robo1, robo2);
                     break;
                 case 5:
 
@@ -108,6 +120,28 @@ public class Main {
             }
         } while (opc != 0);
         s.close();
+    }
+
+    public static Robo buscarRobo(ArrayList<Robo> robosLista, int codigos) {
+        for (Robo r : robosLista) {
+            if (r.codigo == codigos) {
+                return r;
+            }
+        }
+        return null;
+    }
+
+    public static void combate(Robo robo1, Robo robo2){
+        Robo primeiro = robo1;
+        Robo segundo = robo2;
+        if(robo2.pontos < robo1.pontos){
+            primeiro = robo2;
+            segundo = robo1;
+        }
+        if(robo1.pontos == robo2.pontos && robo2.codigo < robo1.codigo){
+            primeiro = robo2;
+            segundo = robo1;
+        }
     }
 
     public static int buscarOperacao(Scanner s) {
