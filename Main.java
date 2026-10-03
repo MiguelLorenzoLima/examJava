@@ -1,3 +1,4 @@
+
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -53,27 +54,7 @@ public class Main {
                 case 2:
                     System.out.println("\n \n \n" + "-------------" + "\n" + "Digite o código do robô: ");
                     int codigoBusca = s.nextInt();
-                    for (Robo roboBuscar : robosLista) {
-                        if (roboBuscar.codigo == codigoBusca) {
-                            System.out.println("\n\nRobô encontrado!\n");
-                            System.out.println("Código: " + roboBuscar.codigo);
-                            System.out.println("Nome: " + roboBuscar.nome);
-                            System.out.println("Ataque: " + roboBuscar.ataque);
-                            System.out.println("Defesa: " + roboBuscar.defesa);
-                            System.out.println("Energia: " + roboBuscar.energiaAtual);
-                            System.out.println("Vitorias: " + roboBuscar.vitorias);
-                            System.out.println("Derrotas: " + roboBuscar.derrotas);
-                            System.out.println("Combates Realizados: " + roboBuscar.combatesRealizados);
-
-                            if (roboBuscar.energiaAtual > 30) {
-                                System.out.println("Pronto para lutar: Disponível!");
-                            } else {
-                                System.out.println("Pronto para lutar: Em recuperação!");
-                            }
-                            System.out.println("Pontuação Total: " + roboBuscar.pontos);
-                            System.out.println("\n\n\n");
-                        }
-                    }
+                    buscarRoboPeloCodigo(robosLista, codigoBusca);
                     break;
 
                 case 3:
@@ -122,7 +103,31 @@ public class Main {
         s.close();
     }
 
-    public static Robo buscarRobo(ArrayList<Robo> robosLista, int codigos) {
+    public static Robo buscarRoboPeloCodigo(ArrayList<Robo> robosLista, int codigos) {
+        for (Robo roboBuscar : robosLista) {
+            if (roboBuscar.codigo == codigos) {
+                System.out.println("\n\nRobô encontrado!\n");
+                System.out.println("Código: " + roboBuscar.codigo);
+                System.out.println("Nome: " + roboBuscar.nome);
+                System.out.println("Ataque: " + roboBuscar.ataque);
+                System.out.println("Defesa: " + roboBuscar.defesa);
+                System.out.println("Energia: " + roboBuscar.energiaAtual);
+                System.out.println("Vitorias: " + roboBuscar.vitorias);
+                System.out.println("Derrotas: " + roboBuscar.derrotas);
+                System.out.println("Combates Realizados: " + roboBuscar.combatesRealizados);
+                if (roboBuscar.energiaAtual > 30) {
+                    System.out.println("Pronto para lutar: Disponível!");
+                } else {
+                    System.out.println("Pronto para lutar: Em recuperação!");
+                }
+                System.out.println("Pontuação Total: " + roboBuscar.pontos);
+                System.out.println("\n\n\n");
+            }
+        }
+        return null;
+    }
+
+    public   static Robo buscarRobo(ArrayList<Robo> robosLista, int codigos) {
         for (Robo r : robosLista) {
             if (r.codigo == codigos) {
                 return r;
@@ -131,14 +136,14 @@ public class Main {
         return null;
     }
 
-    public static void combate(Robo robo1, Robo robo2){
+    public static void combate(Robo robo1, Robo robo2) {
         Robo primeiro = robo1;
         Robo segundo = robo2;
-        if(robo2.pontos < robo1.pontos){
+        if (robo2.pontos < robo1.pontos) {
             primeiro = robo2;
             segundo = robo1;
         }
-        if(robo1.pontos == robo2.pontos && robo2.codigo < robo1.codigo){
+        if (robo1.pontos == robo2.pontos && robo2.codigo < robo1.codigo) {
             primeiro = robo2;
             segundo = robo1;
         }
