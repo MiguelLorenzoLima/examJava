@@ -68,6 +68,21 @@ Essa funcionalidade facilita a visualização dos participantes antes dos combat
 </div>
 
 ---
+---
+
+### 📋 Robôs sendo excluidos
+
+Também é possível excluir todos os robôs que não batalharam ainda.
+
+Essa funcionalidade facilita excluir participantes antes dos combates.
+
+<div align="center">
+
+<img src="<img width="395" height="338" alt="image" src="https://github.com/user-attachments/assets/40e673b6-bfbe-47e7-b741-6d4ba5f98a8a" /> " width="550">
+
+</div>
+
+---
 
 ### ⚔️ Combate entre Robôs
 
