@@ -81,7 +81,7 @@ public class Main {
                     combate(robo1, robo2);
                     break;
                 case 5:
-
+                    rodadaGeral(robosLista);
                     break;
                 case 6:
 
@@ -93,7 +93,9 @@ public class Main {
 
                     break;
                 case 9:
-
+                    System.out.println("Digite o código do robô que será excluído: ");
+                    int codigoExcluir = s.nextInt();
+                    excluirParticipante(robosLista, codigoExcluir);
                     break;
 
                 default:
@@ -212,6 +214,23 @@ public class Main {
             segundo.registrarEmpate();
             System.out.println("Empate! (+1 ponto para cada)");
         }
+    }
+    public static void rodadaGeral(ArrayList<Robo> robosLista){
+        ArrayList<Robo> disponiveisParaCombate = new ArrayList<>();
+        for (Robo r : robosLista) {
+            if (r.estaDisponivel()) {
+                disponiveisParaCombate.add(r);
+            }
+        }
+    }
+    public static void excluirParticipante(ArrayList<Robo> robosLista, int codigo) {
+        Robo r = buscarRobo(robosLista, codigo);
+        if (r.combatesRealizados > 0) {
+            System.out.println("Exclusão recusada: " + r.nome + " já realizou combates.");
+            return;
+        }
+        robosLista.remove(r);
+        System.out.println("Robô " + r.nome + " excluído.");
     }
 
     public static int buscarOperacao(Scanner s) {
