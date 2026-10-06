@@ -6,8 +6,6 @@ O sistema permite cadastrar robôs, consultar informações, visualizar os compe
 
 ---
 
-## 🎮 Funcionalidades
-
 ### 🤖 Cadastro de Robôs
 
 É possível cadastrar novos robôs informando seus principais atributos:
@@ -24,7 +22,6 @@ Além disso, cada robô inicia com:
 - ❌ Derrotas: `0`
 - ⭐ Pontos: `0`
 
-O sistema também realiza validações para evitar dados inválidos.
 
 <div align="center">
 
@@ -76,12 +73,6 @@ Essa funcionalidade facilita a visualização dos participantes antes dos combat
 
 Os competidores podem ser selecionados pelo código para iniciar um combate.
 
-Antes da batalha, o sistema verifica se:
-
-- Os dois códigos são diferentes;
-- Os robôs existem;
-- Os robôs possuem energia suficiente para lutar.
-
 Durante o combate, os robôs realizam ataques e suas energias são atualizadas de acordo com o resultado da batalha.
 
 <div align="center">
@@ -89,50 +80,3 @@ Durante o combate, os robôs realizam ataques e suas energias são atualizadas d
 <img src="https://github.com/user-attachments/assets/b3aef323-aeda-4157-91bf-5cf75fa85481" width="700">
 
 </div>
-
----
-
-## 🧠 Regras dos Robôs
-
-Cada robô possui atributos que influenciam diretamente na competição.
-
-| Atributo | Regra |
-|---|---|
-| 🔢 Código | Deve ser positivo e único |
-| 🤖 Nome | Não pode estar vazio |
-| ⚔️ Ataque | Entre `10` e `30` |
-| 🛡️ Defesa | Entre `0` e `20` |
-| ⚡ Energia | Inicia em `100` |
-| 🏆 Vitórias | Inicia em `0` |
-| ❌ Derrotas | Inicia em `0` |
-| ⭐ Pontos | Inicia em `0` |
-
-### Situação do Robô
-
-Um robô é considerado:
-
-**🟢 Disponível**  
-Quando possui energia igual ou superior a `30`.
-
-**🟡 Em recuperação**  
-Quando possui energia abaixo de `30`.
-
----
-
-## 🖥️ Menu do Sistema
-
-O projeto possui um menu interativo executado diretamente pelo terminal.
-
-```text
-===== BATALHA DOS ROBÔS =====
-
-0. Sair
-1. Cadastrar Robô
-2. Buscar Robô pelo código
-3. Lista dos competidores
-4. Combate individual
-5. Rodada individual
-6. Classificação
-7. Estatísticas
-8. Recuperar participante
-9. Excluir participante
