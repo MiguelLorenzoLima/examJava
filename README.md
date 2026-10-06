@@ -1,27 +1,26 @@
 # 🤖 Batalha dos Robôs
 
-Projeto desenvolvido em **Java** com o objetivo de criar uma competição entre robôs por meio de um sistema executado no terminal.
+Projeto desenvolvido em **Java** para criar uma competição entre robôs através de um sistema executado no terminal.
 
-O sistema permite cadastrar robôs, consultar informações, visualizar os competidores e realizar combates entre eles.
+A aplicação permite **cadastrar, pesquisar, listar, excluir e realizar combates entre robôs**.
 
 ---
 
-### 🤖 Cadastro de Robôs
+## 🤖 Cadastro de Robôs
 
-É possível cadastrar novos robôs informando seus principais atributos:
+Permite cadastrar um novo robô informando:
 
-- Código do robô
-- Nome
-- Ataque
-- Defesa
+* Código
+* Nome
+* Ataque
+* Defesa
 
-Além disso, cada robô inicia com:
+Ao ser cadastrado, o robô inicia com:
 
-- ⚡ Energia: `100`
-- 🏆 Vitórias: `0`
-- ❌ Derrotas: `0`
-- ⭐ Pontos: `0`
-
+* ⚡ Energia: `100`
+* 🏆 Vitórias: `0`
+* ❌ Derrotas: `0`
+* ⭐ Pontos: `0`
 
 <div align="center">
 
@@ -31,21 +30,21 @@ Além disso, cada robô inicia com:
 
 ---
 
-### 🔎 Pesquisa de Robô pelo Código
+## 🔎 Pesquisa de Robô
 
-O sistema permite pesquisar um robô utilizando seu código.
+Permite pesquisar um robô através do seu **código**.
 
-Quando encontrado, são exibidas informações como:
+São exibidas informações como:
 
-- Nome
-- Código
-- Ataque
-- Defesa
-- Energia
-- Vitórias
-- Derrotas
-- Pontos
-- Situação atual
+* Nome
+* Código
+* Ataque
+* Defesa
+* Energia
+* Vitórias
+* Derrotas
+* Pontos
+* Situação atual
 
 <div align="center">
 
@@ -55,11 +54,9 @@ Quando encontrado, são exibidas informações como:
 
 ---
 
-### 📋 Lista de Competidores
+## 📋 Lista de Competidores
 
-Também é possível visualizar todos os robôs cadastrados e seus respectivos atributos.
-
-Essa funcionalidade facilita a visualização dos participantes antes dos combates.
+Permite visualizar todos os robôs cadastrados e seus respectivos atributos.
 
 <div align="center">
 
@@ -69,11 +66,23 @@ Essa funcionalidade facilita a visualização dos participantes antes dos combat
 
 ---
 
-### ⚔️ Combate entre Robôs
+## 🗑️ Exclusão de Robôs
 
-Os competidores podem ser selecionados pelo código para iniciar um combate.
+Permite excluir os robôs que **ainda não batalharam**.
 
-Durante o combate, os robôs realizam ataques e suas energias são atualizadas de acordo com o resultado da batalha.
+<div align="center">
+
+<img src="https://github.com/user-attachments/assets/40e673b6-bfbe-47e7-b741-6d4ba5f98a8a" width="550">
+
+</div>
+
+---
+
+## ⚔️ Combate entre Robôs
+
+Permite selecionar dois robôs através de seus códigos para realizar um combate.
+
+Durante a batalha, os ataques são realizados e a energia dos robôs é atualizada de acordo com o resultado.
 
 <div align="center">
 
