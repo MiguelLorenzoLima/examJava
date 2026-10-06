@@ -127,7 +127,7 @@ public class Main {
         return null;
     }
 
-    public   static Robo buscarRobo(ArrayList<Robo> robosLista, int codigos) {
+    public static Robo buscarRobo(ArrayList<Robo> robosLista, int codigos) {
         for (Robo r : robosLista) {
             if (r.codigo == codigos) {
                 return r;
@@ -137,15 +137,80 @@ public class Main {
     }
 
     public static void combate(Robo robo1, Robo robo2) {
-        Robo primeiro = robo1;
-        Robo segundo = robo2;
-        if (robo2.pontos < robo1.pontos) {
-            primeiro = robo2;
-            segundo = robo1;
+        Robo primeiro = null;
+        Robo segundo = null;
+        if (primeiro == null){
+            System.out.println("Combate recusado: robô " + primeiro + " não encontrado.");
         }
-        if (robo1.pontos == robo2.pontos && robo2.codigo < robo1.codigo) {
+        if (segundo == null){
+            System.out.println("Combate recusado: robô " + segundo + " não encontrado.");
+        }
+        if (robo2.pontos < robo1.pontos ) {
             primeiro = robo2;
             segundo = robo1;
+        }else{
+            primeiro = robo1;
+            segundo = robo2;
+        }
+        
+        int ataquePrimeiro = primeiro.ataque;
+        int defesaPrimeiro = primeiro.defesa;
+
+        int ataqueSegundo = segundo.ataque;
+        int defesaSegundo = segundo.defesa;
+        
+        System.out.println("\n==== COMBATE: " + primeiro.nome + " x " + segundo.nome + " ====");
+        System.out.println(primeiro.nome + " ataca primeiro em todas as rodadas.");
+
+       for (int i = 1; i <= 5; i++) {
+            System.out.println("-- Rodada " + i + " --");
+
+            int totalDano1 = ataquePrimeiro - defesaSegundo;
+            int totalDano2 = ataqueSegundo - defesaPrimeiro;
+
+            if (totalDano1 < 5) {
+                totalDano1 = 5;
+            }
+            if (totalDano2 < 5) {
+                totalDano2 = 5;
+            }
+
+            if (i % 2 == 0) {
+                totalDano1 = totalDano1 + 5;
+                totalDano2 = totalDano2 + 5;
+            }
+            segundo.receberDano(totalDano1);
+            int vidaSegundo = segundo.energiaAtual;
+            System.out.println(primeiro.nome + " causou " + totalDano1 + " de dano. "
+                    + segundo.nome + " tem: " + vidaSegundo + " de vida");
+
+            if (vidaSegundo == 0) {
+                System.out.println(segundo.nome + " ficou sem energia!");
+                break;
+            }
+            primeiro.receberDano(totalDano2);
+            int vidaPrimeiro = primeiro.energiaAtual;
+            System.out.println(segundo.nome + " causou " + totalDano2 + " de dano. "
+                    + primeiro.nome + " tem: " + vidaPrimeiro + " de vida");
+
+            if (vidaPrimeiro == 0) {
+                System.out.println(primeiro.nome + " ficou sem energia!");
+                break;
+            }
+        }
+
+        if (primeiro.energiaAtual > segundo.energiaAtual) {
+            primeiro.registrarVitoria();
+            segundo.registrarDerrota();
+            System.out.println("Vencedor: " + primeiro.nome + "! (+3 pontos)");
+        } else if (segundo.energiaAtual > primeiro.energiaAtual) {
+            segundo.registrarVitoria();
+            primeiro.registrarDerrota();
+            System.out.println("Vencedor: " + segundo.nome + "! (+3 pontos)");
+        } else {
+            primeiro.registrarEmpate();
+            segundo.registrarEmpate();
+            System.out.println("Empate! (+1 ponto para cada)");
         }
     }
 

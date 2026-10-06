@@ -17,4 +17,35 @@ public class Robo {
         this.defesa = defesa;
     }
 
+    public boolean estaDisponivel() {
+        return energiaAtual >= 30;
+    }
+
+    public String situacao() {
+        if (energiaAtual >= 30) {
+            return "Disponível";
+        }
+        return "Em recuperação";
+    }
+     public void receberDano(int dano) {
+        energiaAtual = energiaAtual - dano;
+        if (energiaAtual < 0) {
+            energiaAtual = 0;
+        }
+    }
+    public void registrarVitoria() {
+        vitorias++;
+        pontos = pontos + 3;
+        combatesRealizados++;
+    }
+
+    public void registrarDerrota() {
+        derrotas++;
+        combatesRealizados++;
+    }
+
+    public void registrarEmpate() {
+        pontos = pontos + 1;
+        combatesRealizados++;
+    }
 }
