@@ -1,51 +1,53 @@
 public class Robo {
-    public String nome;
-    public int codigo;
-    public int ataque;
-    public int defesa;
-    public int energiaAtual = 100;
-    public int vitorias = 0; 
-    public int derrotas = 0;
-    public int combatesRealizados = 0;
-    public int pontos = 0;
+    private String nome;
+    private int codigo;
+    private int ataque;
+    private int defesa;
+    private int energiaAtual = 100;
+    private int vitorias = 0; 
+    private int derrotas = 0;
+    private int combatesRealizados = 0;
+    private int pontos = 0;
 
 
-    Robo(String nome, int codigo, int ataque, int defesa) {
-        this.nome = nome;
-        this.codigo = codigo;
-        this.ataque = ataque;
-        this.defesa = defesa;
+    public int getCodigo() {
+        return codigo;
+    }
+    public String getNome() {
+        return nome;
+    }
+    public int getAtaque() {
+        return ataque;
+    }
+    public int getDefesa() {
+        return defesa;
+    }
+    public int getVitorias() {
+        return vitorias;
+    }
+    public int getEnergiaAtual() {
+        return energiaAtual;
+    }
+    public int getDerrotas() {
+        return derrotas;
+    }
+    public int getCombatesRealizados() {
+        return combatesRealizados;
+    }
+    public int getPontos() {
+        return pontos;
     }
 
-    public boolean estaDisponivel() {
-        return energiaAtual >= 30;
-    }
-
-    public String situacao() {
-        if (energiaAtual >= 30) {
-            return "Disponível";
-        }
-        return "Em recuperação";
-    }
-     public void receberDano(int dano) {
-        energiaAtual = energiaAtual - dano;
-        if (energiaAtual < 0) {
+    private void perderEnegia (int dano){
+        energiaAtual -= dano;
+        if (energiaAtual < 0){
             energiaAtual = 0;
         }
     }
-    public void registrarVitoria() {
+
+    private void registrarVitoria(){
         vitorias++;
-        pontos = pontos + 3;
-        combatesRealizados++;
-    }
-
-    public void registrarDerrota() {
-        derrotas++;
-        combatesRealizados++;
-    }
-
-    public void registrarEmpate() {
-        pontos = pontos + 1;
+        pontos = pontos + PONTOS_POR_VITORIA;
         combatesRealizados++;
     }
 }
