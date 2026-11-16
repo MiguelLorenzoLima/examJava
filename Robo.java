@@ -24,6 +24,8 @@ public abstract class Robo {
         this.defesa = defesa;
     }
 
+
+
     public int getCodigo() {
         return codigo;
     }
@@ -57,6 +59,38 @@ public abstract class Robo {
     public boolean estaDerrotado() {
         return energiaAtual <= 0;
     }
+    public void registrarDerrota() {
+        derrotas++;
+        combatesRealizados++;
+    }   
+
+
+
+    public abstract String getTipo(); //é para dizer qual é o tipo de cada subclasse, é obrigatório
+
+    protected int calcularPoderDeAtaque() {
+        return ataque;
+    }
+    protected int ajustarDanoRecebido(int dano) {
+        return dano;
+    }
+
+    public final int atacar(Robo alvo, int rodada){
+        int dano = this.calcularPoderDeAtaque();
+        dano = dano - alvo.getDefesa();
+        if (dano < DANO_MINIMO) {
+            dano = DANO_MINIMO;
+        }
+        if (rodada % 2 == 0) {
+            dano += BONUS_RODADA_PAR;
+        }
+        dano = alvo.ajustarDanoRecebido(dano);
+        alvo.perderEnegia(dano);
+        return dano;
+    }
+
+
+    
 
     private void perderEnegia (int dano){
         energiaAtual -= dano;
@@ -65,9 +99,10 @@ public abstract class Robo {
         }
     }
 
-    private void registrarVitoria(){
+    public void registrarVitoria(){
         vitorias++;
         pontos = pontos + PONTOS_POR_VITORIA;
         combatesRealizados++;
     }
+
 }
