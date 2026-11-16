@@ -141,30 +141,30 @@ public class Main {
     public static void combate(Robo robo1, Robo robo2) {
         Robo primeiro = null;
         Robo segundo = null;
-        if (primeiro == null){
+        if (primeiro == null) {
             System.out.println("Combate recusado: robô " + primeiro + " não encontrado.");
         }
-        if (segundo == null){
+        if (segundo == null) {
             System.out.println("Combate recusado: robô " + segundo + " não encontrado.");
         }
-        if (robo2.pontos < robo1.pontos ) {
+        if (robo2.pontos < robo1.pontos) {
             primeiro = robo2;
             segundo = robo1;
-        }else{
+        } else {
             primeiro = robo1;
             segundo = robo2;
         }
-        
+
         int ataquePrimeiro = primeiro.ataque;
         int defesaPrimeiro = primeiro.defesa;
 
         int ataqueSegundo = segundo.ataque;
         int defesaSegundo = segundo.defesa;
-        
+
         System.out.println("\n==== COMBATE: " + primeiro.nome + " x " + segundo.nome + " ====");
         System.out.println(primeiro.nome + " ataca primeiro em todas as rodadas.");
 
-       for (int i = 1; i <= 5; i++) {
+        for (int i = 1; i <= 5; i++) {
             System.out.println("-- Rodada " + i + " --");
 
             int totalDano1 = ataquePrimeiro - defesaSegundo;
@@ -215,7 +215,8 @@ public class Main {
             System.out.println("Empate! (+1 ponto para cada)");
         }
     }
-    public static void rodadaGeral(ArrayList<Robo> robosLista){
+
+    public static void rodadaGeral(ArrayList<Robo> robosLista) {
         ArrayList<Robo> disponiveisParaCombate = new ArrayList<>();
         for (Robo r : robosLista) {
             if (r.estaDisponivel()) {
@@ -223,6 +224,7 @@ public class Main {
             }
         }
     }
+
     public static void excluirParticipante(ArrayList<Robo> robosLista, int codigo) {
         Robo r = buscarRobo(robosLista, codigo);
         if (r.combatesRealizados > 0) {
