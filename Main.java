@@ -43,12 +43,19 @@ public class Main {
                     System.out.println("Digite o valor de defesa do robô (somente números): ");
                     int defesa = s.nextInt();
 
-                    Robo robo = new Robo(
-                            nome,
-                            codigo,
-                            ataque,
-                            defesa);
+                    int tipo;
+                    do {
+                        System.out.println("Digite o tipo do robô: ");
+                        System.out.println("1. Ofensivo");
+                        System.out.println("2. Defensivo");
+                        System.out.println("3. Equilibrado");
+                        tipo = s.nextInt();
+                    } while (tipo < 1 || tipo > 3);
+
+
+                    Robo robo = new criarRobo(nome, codigo, ataque, defesa);
                     robosLista.add(robo);
+                    System.out.println("Robô " + robo.getTipo() + " cadastrado!!!!!!");
                     break;
 
                 case 2:
@@ -105,38 +112,30 @@ public class Main {
         s.close();
     }
 
-    public static Robo buscarRoboPeloCodigo(ArrayList<Robo> robosLista, int codigos) {
+    public static Robo criarRobo(int tipo,String nome, int codigo, int ataque, int defesa) {
+        switch (tipo) {
+            case 1:
+                return new RoboOfensivo(nome, codigo, ataque, defesa);
+            case 2:
+                return new RoboDefensivo(nome, codigo, ataque, defesa);
+            case 3:
+                return new RoboEquilibrado(nome, codigo, ataque, defesa);
+            default:
+                return null;
+        }
+    }
+
+
+    public static Robo buscarRobo(ArrayList<Robo> robosLista, int codigos) {
         for (Robo roboBuscar : robosLista) {
-            if (roboBuscar.codigo == codigos) {
-                System.out.println("\n\nRobô encontrado!\n");
-                System.out.println("Código: " + roboBuscar.codigo);
-                System.out.println("Nome: " + roboBuscar.nome);
-                System.out.println("Ataque: " + roboBuscar.ataque);
-                System.out.println("Defesa: " + roboBuscar.defesa);
-                System.out.println("Energia: " + roboBuscar.energiaAtual);
-                System.out.println("Vitorias: " + roboBuscar.vitorias);
-                System.out.println("Derrotas: " + roboBuscar.derrotas);
-                System.out.println("Combates Realizados: " + roboBuscar.combatesRealizados);
-                if (roboBuscar.energiaAtual > 30) {
-                    System.out.println("Pronto para lutar: Disponível!");
-                } else {
-                    System.out.println("Pronto para lutar: Em recuperação!");
-                }
-                System.out.println("Pontuação Total: " + roboBuscar.pontos);
-                System.out.println("\n\n\n");
+            if (roboBuscar.getCodigo() == codigos) {
+                return roboBuscar;
             }
         }
         return null;
     }
 
-    public static Robo buscarRobo(ArrayList<Robo> robosLista, int codigos) {
-        for (Robo r : robosLista) {
-            if (r.codigo == codigos) {
-                return r;
-            }
-        }
-        return null;
-    }
+
 
     public static void combate(Robo robo1, Robo robo2) {
         Robo primeiro = null;
