@@ -52,8 +52,7 @@ public class Main {
                         tipo = s.nextInt();
                     } while (tipo < 1 || tipo > 3);
 
-
-                    Robo robo = new criarRobo(nome, codigo, ataque, defesa);
+                    Robo robo = criarRobo(tipo, nome, codigo, ataque, defesa);
                     robosLista.add(robo);
                     System.out.println("Robô " + robo.getTipo() + " cadastrado!!!!!!");
                     break;
@@ -61,7 +60,27 @@ public class Main {
                 case 2:
                     System.out.println("\n \n \n" + "-------------" + "\n" + "Digite o código do robô: ");
                     int codigoBusca = s.nextInt();
-                    buscarRoboPeloCodigo(robosLista, codigoBusca);
+                    Robo roboBuscar = buscarRobo(robosLista, codigoBusca);
+                    if (roboBuscar == null) {
+                        System.out.println("Robô não encontrado!");
+                        break;
+                    }
+                    System.out.println("\n\n\n\n\nRobô encontrado!\n");
+                    System.out.println("Código: " + roboBuscar.getCodigo());
+                    System.out.println("Nome: " + roboBuscar.getNome());
+                    System.out.println("Tipo: " + roboBuscar.getTipo());
+                    System.out.println("Ataque: " + roboBuscar.getAtaque());
+                    System.out.println("Defesa: " + roboBuscar.getDefesa());
+                    System.out.println("Energia: " + roboBuscar.getEnergiaAtual());
+                    System.out.println("Vitorias: " + roboBuscar.getVitorias());
+                    System.out.println("Derrotas: " + roboBuscar.getDerrotas());
+                    System.out.println("Combates Realizados: " + roboBuscar.getCombatesRealizados());
+                    if (roboBuscar.estaDisponivelParaLutar()) {
+                        System.out.println("Pronto para lutar: Disponível!");
+                    } else {
+                        System.out.println("Pronto para lutar: Em recuperação!");
+                    }
+                    System.out.println("Pontuação Total: " + roboBuscar.getPontos());
                     break;
 
                 case 3:
@@ -69,10 +88,11 @@ public class Main {
                     for (Robo r : robosLista) {
                         System.out.println(
                                 "\n" + "-------------" + "\n" +
-                                        " Nome: " + r.nome + "\n" +
-                                        " Código: " + r.codigo + "\n" +
-                                        " ataque: " + r.ataque + "\n" +
-                                        " defesa: " + r.defesa + "\n \n");
+                                        " Nome: " + r.getNome() + "\n" +
+                                        " Código: " + r.getCodigo() + "\n" +
+                                        " Tipo: " + r.getTipo() + "\n" +
+                                        " ataque: " + r.getAtaque() + "\n" +
+                                        " defesa: " + r.getDefesa() + "\n \n\n\n\n");
                     }
                     break;
                 case 4:
@@ -88,7 +108,6 @@ public class Main {
                     combate(robo1, robo2);
                     break;
                 case 5:
-                    rodadaGeral(robosLista);
                     break;
                 case 6:
 
@@ -102,6 +121,10 @@ public class Main {
                 case 9:
                     System.out.println("Digite o código do robô que será excluído: ");
                     int codigoExcluir = s.nextInt();
+                    if(codigoExcluir == 0){
+                        System.out.println("Não há robôs cadastrados para exclusão.");
+                        break;
+                    }
                     excluirParticipante(robosLista, codigoExcluir);
                     break;
 
@@ -112,7 +135,7 @@ public class Main {
         s.close();
     }
 
-    public static Robo criarRobo(int tipo,String nome, int codigo, int ataque, int defesa) {
+    public static Robo criarRobo(int tipo, String nome, int codigo, int ataque, int defesa) {
         switch (tipo) {
             case 1:
                 return new RoboOfensivo(nome, codigo, ataque, defesa);
@@ -125,7 +148,6 @@ public class Main {
         }
     }
 
-
     public static Robo buscarRobo(ArrayList<Robo> robosLista, int codigos) {
         for (Robo roboBuscar : robosLista) {
             if (roboBuscar.getCodigo() == codigos) {
@@ -135,103 +157,62 @@ public class Main {
         return null;
     }
 
-
-
     public static void combate(Robo robo1, Robo robo2) {
-        Robo primeiro = null;
-        Robo segundo = null;
-        if (primeiro == null) {
-            System.out.println("Combate recusado: robô " + primeiro + " não encontrado.");
+        if (robo1 == null || robo2 == null || robo1 == robo2) {
+            System.out.println("Combate Inválido, robôs ");
+            return;
         }
-        if (segundo == null) {
-            System.out.println("Combate recusado: robô " + segundo + " não encontrado.");
+        if (!robo1.estaDisponivelParaLutar() || !robo2.estaDisponivelParaLutar()) {
+            System.out.println("Não é possível realizar o combate, algum robô não está dispoível para lutar!");
+            return;
         }
-        if (robo2.pontos < robo1.pontos) {
+        Robo primeiro = robo1;
+        Robo segundo = robo2;
+        if (robo2.getPontos() < robo1.getPontos()) {
             primeiro = robo2;
             segundo = robo1;
-        } else {
-            primeiro = robo1;
-            segundo = robo2;
         }
 
-        int ataquePrimeiro = primeiro.ataque;
-        int defesaPrimeiro = primeiro.defesa;
-
-        int ataqueSegundo = segundo.ataque;
-        int defesaSegundo = segundo.defesa;
-
-        System.out.println("\n==== COMBATE: " + primeiro.nome + " x " + segundo.nome + " ====");
-        System.out.println(primeiro.nome + " ataca primeiro em todas as rodadas.");
-
-        for (int i = 1; i <= 5; i++) {
-            System.out.println("-- Rodada " + i + " --");
-
-            int totalDano1 = ataquePrimeiro - defesaSegundo;
-            int totalDano2 = ataqueSegundo - defesaPrimeiro;
-
-            if (totalDano1 < 5) {
-                totalDano1 = 5;
-            }
-            if (totalDano2 < 5) {
-                totalDano2 = 5;
-            }
-
-            if (i % 2 == 0) {
-                totalDano1 = totalDano1 + 5;
-                totalDano2 = totalDano2 + 5;
-            }
-            segundo.receberDano(totalDano1);
-            int vidaSegundo = segundo.energiaAtual;
-            System.out.println(primeiro.nome + " causou " + totalDano1 + " de dano. "
-                    + segundo.nome + " tem: " + vidaSegundo + " de vida");
-
-            if (vidaSegundo == 0) {
-                System.out.println(segundo.nome + " ficou sem energia!");
-                break;
-            }
-            primeiro.receberDano(totalDano2);
-            int vidaPrimeiro = primeiro.energiaAtual;
-            System.out.println(segundo.nome + " causou " + totalDano2 + " de dano. "
-                    + primeiro.nome + " tem: " + vidaPrimeiro + " de vida");
-
-            if (vidaPrimeiro == 0) {
-                System.out.println(primeiro.nome + " ficou sem energia!");
-                break;
-            }
+        if (robo1.getPontos() == robo2.getPontos() && robo2.getCodigo() < robo1.getCodigo()) {
+            primeiro = robo2;
+            segundo = robo1;
         }
+        System.out.println("\n==== " + primeiro.getNome() + " (" + primeiro.getTipo() + ") x " + segundo.getNome()
+                + " (" + segundo.getTipo() + ") ====");
 
-        if (primeiro.energiaAtual > segundo.energiaAtual) {
-            primeiro.registrarVitoria();
-            segundo.registrarDerrota();
-            System.out.println("Vencedor: " + primeiro.nome + "! (+3 pontos)");
-        } else if (segundo.energiaAtual > primeiro.energiaAtual) {
-            segundo.registrarVitoria();
-            primeiro.registrarDerrota();
-            System.out.println("Vencedor: " + segundo.nome + "! (+3 pontos)");
-        } else {
-            primeiro.registrarEmpate();
-            segundo.registrarEmpate();
-            System.out.println("Empate! (+1 ponto para cada)");
+        int rodada = 1;
+        while (!primeiro.estaDerrotado() && !segundo.estaDerrotado()) {
+            golpe(primeiro, segundo, rodada);
+            if (!segundo.estaDerrotado()) {
+                golpe(segundo, primeiro, rodada);
+            }
+            rodada++;
         }
+        Robo vencedor = primeiro;
+        Robo perdedor = segundo;
+        if (primeiro.estaDerrotado()) {
+            vencedor = segundo;
+            perdedor = primeiro;
+        }
+        vencedor.registrarVitoria();
+        perdedor.registrarDerrota();
+        System.out.println("Vencedor: " + vencedor.getNome() + " (" + vencedor.getTipo() + ")\n");
     }
 
-    public static void rodadaGeral(ArrayList<Robo> robosLista) {
-        ArrayList<Robo> disponiveisParaCombate = new ArrayList<>();
-        for (Robo r : robosLista) {
-            if (r.estaDisponivel()) {
-                disponiveisParaCombate.add(r);
-            }
-        }
+    public static void golpe(Robo agressor, Robo alvo, int rodada) {
+        int dano = agressor.atacar(alvo, rodada);
+        System.out.println("Rodada " + rodada + ": " + agressor.getNome() + " causou " + dano + " de dano em "
+                + alvo.getNome() + " (energia: " + alvo.getEnergiaAtual() + ")");
     }
 
     public static void excluirParticipante(ArrayList<Robo> robosLista, int codigo) {
         Robo r = buscarRobo(robosLista, codigo);
-        if (r.combatesRealizados > 0) {
-            System.out.println("Exclusão recusada: " + r.nome + " já realizou combates.");
+        if (r.getCombatesRealizados() > 0) {
+            System.out.println("Exclusão recusada: " + r.getNome() + " já realizou combates.");
             return;
         }
         robosLista.remove(r);
-        System.out.println("Robô " + r.nome + " excluído.");
+        System.out.println("Robô " + r.getNome() + " excluído.");
     }
 
     public static int buscarOperacao(Scanner s) {

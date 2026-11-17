@@ -65,8 +65,7 @@ public abstract class Robo {
     }   
 
 
-
-    public abstract String getTipo(); //é para dizer qual é o tipo de cada subclasse, é obrigatório
+    public abstract String getTipo();
 
     protected int calcularPoderDeAtaque() {
         return ataque;
@@ -88,9 +87,6 @@ public abstract class Robo {
         alvo.perderEnegia(dano);
         return dano;
     }
-
-
-    
 
     private void perderEnegia (int dano){
         energiaAtual -= dano;
