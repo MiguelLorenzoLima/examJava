@@ -7,6 +7,7 @@ public class Main {
 
     public static void main(String[] args) {
         Scanner s = new Scanner(System.in);
+        //polimorfismo porque nessa lista esta guardando 3 robos "diferentes"
         ArrayList<Robo> robosLista = new ArrayList<>();
         int opc = -1;
 
@@ -51,7 +52,7 @@ public class Main {
                         System.out.println("3. Equilibrado");
                         tipo = s.nextInt();
                     } while (tipo < 1 || tipo > 3);
-
+                    //polimorfismo, criando o robo de conforme o tipo é escolhido
                     Robo robo = criarRobo(tipo, nome, codigo, ataque, defesa);
                     robosLista.add(robo);
                     System.out.println("Robô " + robo.getTipo() + " cadastrado!!!!!!");
@@ -68,6 +69,7 @@ public class Main {
                     System.out.println("\n\n\n\n\nRobô encontrado!\n");
                     System.out.println("Código: " + roboBuscar.getCodigo());
                     System.out.println("Nome: " + roboBuscar.getNome());
+                    //polimorfismo, chamando o metodo getTipo() de acordo com o tipo do robo
                     System.out.println("Tipo: " + roboBuscar.getTipo());
                     System.out.println("Ataque: " + roboBuscar.getAtaque());
                     System.out.println("Defesa: " + roboBuscar.getDefesa());
@@ -86,6 +88,7 @@ public class Main {
                 case 3:
                     System.out.println("==== Listagem dos competidores ====");
                     for (Robo r : robosLista) {
+                        //polimorfismo, chamando o metodo getTipo() que irá retornar diferentes tipos de robô
                         System.out.println(
                                 "\n" + "-------------" + "\n" +
                                         " Nome: " + r.getNome() + "\n" +

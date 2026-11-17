@@ -1,3 +1,5 @@
+//classe abstrata que da inicio a herança
+//todos os atributos são private, criando o encapsulamento
 public abstract class Robo {
     
     private static final int ENERGIA_INICIAL = 100;
@@ -67,13 +69,16 @@ public abstract class Robo {
 
     public abstract String getTipo();
 
+    //polimorfismo
     protected int calcularPoderDeAtaque() {
         return ataque;
     }
+
+    //polimorfismo
     protected int ajustarDanoRecebido(int dano) {
         return dano;
     }
-
+    //polimorfismo
     public final int atacar(Robo alvo, int rodada){
         int dano = this.calcularPoderDeAtaque();
         dano = dano - alvo.getDefesa();
@@ -88,13 +93,14 @@ public abstract class Robo {
         return dano;
     }
 
+    //encapsulamento 
     private void perderEnegia (int dano){
         energiaAtual -= dano;
         if (energiaAtual < 0){
             energiaAtual = 0;
         }
     }
-
+    //encapsulamento
     public void registrarVitoria(){
         vitorias++;
         pontos = pontos + PONTOS_POR_VITORIA;
