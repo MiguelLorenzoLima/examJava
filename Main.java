@@ -121,10 +121,6 @@ public class Main {
                 case 9:
                     System.out.println("Digite o código do robô que será excluído: ");
                     int codigoExcluir = s.nextInt();
-                    if(codigoExcluir == 0){
-                        System.out.println("Não há robôs cadastrados para exclusão.");
-                        break;
-                    }
                     excluirParticipante(robosLista, codigoExcluir);
                     break;
 
@@ -207,6 +203,10 @@ public class Main {
 
     public static void excluirParticipante(ArrayList<Robo> robosLista, int codigo) {
         Robo r = buscarRobo(robosLista, codigo);
+        if(r == null) {
+            System.out.println("Robô não encontrado!");
+            return;
+        }
         if (r.getCombatesRealizados() > 0) {
             System.out.println("Exclusão recusada: " + r.getNome() + " já realizou combates.");
             return;
